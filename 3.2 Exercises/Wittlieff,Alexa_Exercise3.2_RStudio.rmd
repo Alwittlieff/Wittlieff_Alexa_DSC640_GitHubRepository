@@ -1,0 +1,39 @@
+---
+title: "3.2 Assignment"
+author: "Alexa Wittlieff"
+date: "July 17, 2022"
+output: 
+    pdf_document: default
+---
+
+```{r echo=FALSE}
+setwd("C:/Users/Alexa/Documents/GitHub/Wittlieff_Alexa_DSC640_GitHubRepository/3.2 Exercises")
+```
+
+```{r include=FALSE}
+library('ggplot2')
+library('dplyr')
+library('tidyverse')
+library('mapview')
+library('sf')
+```
+
+```{r echo = FALSE}
+crime_df<- read.csv('crimerates-by-state-2005.csv', header=TRUE)
+```
+
+```{r}
+ggplot(crime_df, aes(x=population, y=aggravated_assault))+ geom_point(colour='red') + theme_bw() + theme(panel.border = element_blank(), 
+      panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + xlab("State Population") + ylab("Aggravated Assaults") + ggtitle("Aggravated Assault Crime Rate by State Population")
+```
+
+```{r}
+ggplot(crime_df, aes(x=aggravated_assault, y=murder, size=population))+ geom_point(colour='red') + theme_bw() + theme(panel.border = element_blank(),
+      panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + xlab("Aggravated Assaults") + ylab("Murders") + ggtitle("Murder and Aggrevated Assault Crime Rates by State Population") + geom_text(label=crime_df$state, size=3, hjust=-.1)
+```
+
+```{r}
+ggplot(crime_df, aes(x=aggravated_assault, color= "red")) + geom_density()+ theme_bw() + theme(panel.border = element_blank(), 
+      panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + xlab("Aggravated Assaults") + ylab("Density") + ggtitle("United States Aggravated Assault Crime Rates")
+```
+
