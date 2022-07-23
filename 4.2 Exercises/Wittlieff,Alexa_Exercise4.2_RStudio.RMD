@@ -1,0 +1,46 @@
+---
+title: "4.2 Assignment"
+author: "Alexa Wittlieff"
+date: "July 31, 2022"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+```{r echo=FALSE}
+setwd("C:/Users/Alexa/Documents/GitHub/Wittlieff_Alexa_DSC640_GitHubRepository/4.2 Exercises")
+```
+
+```{r include=FALSE}
+library('ggplot2')
+library('dplyr')
+library('tidyverse')
+library('mapview')
+library('sf')
+```
+
+```{r echo = FALSE}
+df_bb<- read.csv('ppg2008.csv', header=TRUE)
+df_costco<- read.csv('costcos-geocoded.csv', header=TRUE)
+```
+
+```{r}
+data <- as.matrix(df_bb[, -1])
+names(df_bb) <- make.names(names(df_bb), unique=TRUE)
+rownames(data) <- df_bb$Name
+
+
+heatmap(data, Colv = NA, Rowv = NA, scale="column", main= '2008 NBA Player Stats')
+```
+
+```{r}
+mapview(df_costco, xcol='Longitude', ycol = 'Latitude', crs=4326, grid = FALSE, legend = FALSE)
+```
+
+```{r}
+ggplot(data = df_bb, aes(x=MIN, y=PTS, fill = ..level..)) +
+    stat_density2d_filled(geom='polygon') +
+    ggtitle("2008 NBA Minutes Vs Points")
+```
+
