@@ -1,0 +1,51 @@
+---
+title: "5.2 Assignment"
+author: "Alexa Wittlieff"
+date: "August 13, 2022"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r echo=FALSE}
+setwd("C:/Users/Alexa/Documents/GitHub/Wittlieff_Alexa_DSC640_GitHubRepository/5.2 Exercises")
+```
+
+```{r include=FALSE}
+library('ggplot2')
+library(plotly)
+library('dplyr')
+library('tidyverse')
+```
+
+
+```{r echo = FALSE}
+df<- read.csv('education.csv', header=TRUE)
+```
+
+```{r}
+hist(df$pupil_staff_ratio, main="United States Pupil to Staff Ratio",
+     xlab="Pupil to Staff Ratio", ylab="Count", col="green")
+```
+
+```{r}
+boxplot(df$pupil_staff_ratio, main="Pupil to Staff Ratio by State", 
+        ylab="Pupil to Staff Ratio", col="green")
+```
+
+
+```{r}
+p <- df %>%
+    ggplot(aes(x = reading, y = state)) + geom_col(aes(x=523), fill="yellow") +
+    geom_col(width=0.5, fill="black") + ggtitle("Reading Scores by State")
+
+ggplotly(p)
+```
+
+```{r}
+ggplot(df, aes(x=reading, y=writing))+ geom_point(colour='green') + theme_bw() + theme(panel.border = element_blank(), 
+      panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "grey")) + xlab("Reading Score") + ylab("Writing Score") + ggtitle("Reading vs Writing Scores")
+```
+```
+
